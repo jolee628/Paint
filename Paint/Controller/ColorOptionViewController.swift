@@ -16,7 +16,15 @@ class ColorOptionViewController: UIViewController {
     var blackButton = UIButton()
     var redButton = UIButton()
     var drawingView: DrawingView
-    private var colorStackView = UIStackView()
+    lazy var colorStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 30
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        return stackView
+    }()
     
     init(drawingView: DrawingView) {
         self.drawingView = drawingView
@@ -98,7 +106,6 @@ extension ColorOptionViewController {
     }
     
     func setUpView() {
-        colorStackView.translatesAutoresizingMaskIntoConstraints = false
         colorStackView.addArrangedSubview(blueButton)
         colorStackView.addArrangedSubview(greenButton)
         colorStackView.addArrangedSubview(brownButton)
@@ -107,8 +114,9 @@ extension ColorOptionViewController {
         colorStackView.axis = .vertical
         NSLayoutConstraint.activate([
             colorStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            colorStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            ])
+            colorStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            colorStackView.widthAnchor.constraint(equalToConstant: 100)
+        ])
     }
     
 }
